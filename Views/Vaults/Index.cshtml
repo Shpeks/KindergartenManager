@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Diplom.Models.Vault>
+<link rel="stylesheet" href="~/css/Table.css" />
+
+<div class="container rounded bg-white">
+    <div class="h2 ml-2 font-weight-bold">Своды</div>
+    <div style="max-height:600px; overflow-y:auto;">
+        <table class="table">
+            <thead class="sticky-top">
+                <tr class="bg-white">
+                    
+                    <th scope="col">
+                        Дата начала
+                    </th>
+                    <th scope="col">
+                        Дата конца
+                    </th>
+                    <th scope="col">
+                        Автор
+                    </th>
+                    <th>
+                        <a class="btn btn-sm btn-icon-only icon-color" asp-action="Create" title="Добавить свод">
+                            <i class="bi bi-plus-lg"></i>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="bg-blue">
+                        
+                        <td class="pt-3">
+                            @Html.DisplayFor(modelItem => item.DateStart)
+                        </td>
+                        <td class="pt-3">
+                            @Html.DisplayFor(modelItem => item.DateEnd)
+                        </td>
+                        <td class="pt-3">
+                            @Html.DisplayFor(modelItem => item.ApplicationUsers.LastName)
+                        </td>
+                        <td class="pt-3">
+                            <div class="dropdown position-static">
+                                <a class="btn btn-sm btn-icon-only icon-color" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" style="z-index:9999">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="dropdown-item">Редактирование</a>
+                                    <a asp-action="Index" asp-controller="VaultNotes" asp-route-IdVault="@item.Id" class="dropdown-item">Детали</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="dropdown-item">Удалить</a>
+                                    <a asp-action="ExportData" asp-route-id="@item.Id" class="dropdown-item">Экспорт данных</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

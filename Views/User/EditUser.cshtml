@@ -1,0 +1,61 @@
+﻿@model EditUserViewModel
+
+@{
+    ViewBag.Title = "Редактирование пользователя";
+}
+
+<h1>Редактирование пользователя</h1>
+
+<form method="post" class="mt-3">
+
+    <div class="form-group row">
+        <label asp-for="FirstName" class="col-sm-2 col-form-label">Имя</label>
+        <div class="col-sm-10">
+            <input asp-for="FirstName" class="form-control">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="LastName" class="col-sm-2 col-form-label">Фамилия</label>
+        <div class="col-sm-10">
+            <input asp-for="LastName" class="form-control">
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Роль</label>
+        <div class="col-sm-10">
+            
+            @if (Model.Roles.Any())
+            {
+                foreach (var role in Model.Roles)
+                {
+                    <input class="form-control" disabled style="margin-bottom: 16px" asp-for="@role">
+                }
+            }
+            else
+            {
+                <h5 class="card-title">None at the moment</h5>
+            }
+        </div>
+
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Обновить</button>
+            <a asp-action="ListUsers" class="btn btn-primary">Отмена</a>
+        </div>
+    </div>
+
+   
+</form>

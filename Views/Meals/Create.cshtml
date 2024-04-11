@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Diplom.Models.Meal>
+<link rel="stylesheet" href="~/css/Table.css" />
+
+<h4>Блюдо</h4>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-route-IdMenu="@ViewBag.IdMenu">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.FirstOrDefault().Name" class="control-label">Название</label>
+                <input asp-for="@Model.FirstOrDefault().Name" value="" class="form-control" />
+                <span asp-validation-for="@Model.FirstOrDefault().Name" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:flex">
+                <div>
+                    <input type="submit" value="Добавить" class="btn btn-primary" />
+                </div>
+                <div>
+                    <p>
+                        <a asp-controller="MenuFoods" asp-action="Index" asp-route-IdMenu="@ViewBag.IdMenu" class="btn">
+                            <i class="bi bi-arrow-return-left"></i>
+                            Вернуться к меню еды
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr />
+
+
+<div class="container rounded bg-white" style="padding:0">
+    <div class="h2 ml-2 font-weight-bold">Список блюд</div>
+
+    <div style="max-height: 600px; overflow-y: auto;">
+        <table class="table">
+            <thead class="sticky-top">
+                <tr class="bg-white">
+                    <th scope="col">Название</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var meal in Model)
+                {
+                    <tr class="bg-blue">
+                        <td class="pt-3">@meal.Name</td>
+                        <td class="pt-3">
+                            <div class="dropdown position" style="z-index:9999">
+                                <a class="btn btn-sm btn-icon-only icon-color" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a class="dropdown-item" href="@Url.Action("Edit", "Meals", new { id = meal.Id, IdMenu = ViewBag.IdMenu })">Редактировать</a>
+                                    <a class="dropdown-item" href="@Url.Action("Delete", "Meals", new { id = meal.Id, IdMenu = ViewBag.IdMenu })">Удалить</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

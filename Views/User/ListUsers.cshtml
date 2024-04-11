@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewBag.Title = "Все пользователи";
+}
+<h1>Все пользователи</h1>
+
+@if(Model.Any())
+{
+ <a asp-area="Identity" asp-page="/Account/Register"
+       class="btn btn-primary mb-3" style="width:auto">
+        Добавить нового пользователя
+    </a>
+   
+    foreach (var user in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Логин: @user.UserName
+            </div>
+
+            <div class="card-body">
+
+                <table style="display:table">
+                    <tr>
+                        <td style="padding-right: 15px;">
+                            @if (user.ProfilePicture != null)
+                            {
+                                <img id="profilePicture" style="width:70px;height:70px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(user.ProfilePicture))">
+                            }
+                            else
+                            {
+                                <img id="profilePicture" style="width:70px;height:70px;display:none; object-fit:cover" src="">
+                            }
+                        </td>
+                        <td>
+                            <table style="display:inline-table">
+                                <tr>
+                                    <th style="padding-right:15px">Имя: </th>
+                                    <td>@user.FirstName</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding-right:15px">Фамилия: </th>
+                                    <td>@user.LastName</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding-right:15px">Email: </th>
+                                    <td>@user.Email</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+            </div>
+           
+
+
+            <div class="card-footer">
+                <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
+                <a asp-action="EditUser" asp-controller="User" asp-route-id="@user.Id" class="btn btn-primary">Изменить</a>
+                <button type="submit" class="btn btn-danger"
+                onclick="return confirm('Вы уверены что хотите удалить данного пользователя: @user.FirstName @user.LastName')">Удалить</button>
+                   
+                   
+                </form>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            Еще не создано пользователей
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Используйте кнопку ниже, чтобы создать пользователя
+            </h5>
+            <a class="btn btn-primary" style="width:auto"
+               asp-controller="Account" asp-action="Register">
+                Добавить нового пользователя
+            </a>
+        </div>
+    </div>
+}

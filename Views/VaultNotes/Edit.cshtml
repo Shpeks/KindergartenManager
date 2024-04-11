@@ -1,0 +1,46 @@
+﻿@model Diplom.Models.VaultNote
+
+
+
+<h4>Количество детей</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="IdVault" />
+            <div class="form-group">
+
+                <input asp-for="Date" type="hidden" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Сад</label>
+                <input asp-for="ChildCount" type="number" class="form-control" />
+                <span asp-validation-for="ChildCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Ясли</label>
+                <input asp-for="KidCount" type="number" class="form-control" />
+                <span asp-validation-for="KidCount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="display:flex">
+                <div>
+                <input type="submit" value="Сохранить" class="btn btn-primary"/>
+                </div>
+                <div>
+                    <a asp-action="Index" asp-route-idVault="@Model.IdVault" class="btn">
+                    <i class="bi bi-arrow-return-left"></i>
+                    Вернуться</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

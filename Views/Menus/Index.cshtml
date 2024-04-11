@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Diplom.Models.Menu>
+<link rel="stylesheet" href="~/css/Table.css" />
+
+<div class="container rounded bg-white">
+    <div class="h2 ml-2 font-weight-bold">Меню</div>
+
+    <div style="max-height: 600px; overflow-y: auto;">
+        <table class="table">
+            <thead class="sticky-top">
+                <tr class="bg-white">
+                    
+                    <th scope="col">Дата</th>
+                    <th scope="col">Кому</th>
+                    <th scope="col">Детей</th>
+                    <th>Добавил(а)</th>
+                    <th>
+                        <a class="btn btn-sm btn-icon-only icon-color" asp-action="Create" title="Добавить меню">
+                            <i class="bi bi-plus-lg"></i>
+                        </a>
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="bg-blue">
+                        
+                        <td class="pt-3 mt-1">@item.date.ToString("dd.MM.yyyy")</td>
+                        <td class="pt-3">@item.ChildHouse</td>
+                        <td class="pt-3">@item.ChildCount</td>
+                        <td class="pt-3">@item.ApplicationUsers.LastName</td>
+                        <td class="pt-3">
+                            <div class="dropdown position" >
+                                <a class="btn btn-sm btn-icon-only icon-color" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="MenuFoods" asp-route-IdMenu="@item.Id">Детали</a>
+                                    <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                                </div>
+
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

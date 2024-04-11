@@ -1,0 +1,53 @@
+﻿@using Diplom.Models
+@using Microsoft.AspNetCore.Http
+@model List<Diplom.Models.UserRolesViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Роли пользователей</h1>
+<form method="get">
+    <div class="form-group">
+        <label for="roleFilter">Фильтр по роли:</label>
+        <select class="form-control w-25" id="roleFilter" name="roleFilter">
+            <option value="">Все роли</option>
+            <option value="Admin">Администратор</option>
+            <option value="Guest">Гость</option>
+            <option value="Medic">Медик</option>
+            <option value="Fabricator">Агент по снабжению</option>
+            <option value="Dev">Разработчик</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">Применить</button>
+</form>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Почта</th>
+            <th>Роли</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            @if (string.IsNullOrEmpty(Context.Request.Query["roleFilter"]) || user.Roles.Any(r => r == Context.Request.Query["roleFilter"]))
+
+            {
+                <tr>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@string.Join(", ", user.Roles.ToList())</td>
+
+                    <td>
+                        <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Управление ролями</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

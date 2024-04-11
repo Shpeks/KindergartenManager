@@ -1,0 +1,54 @@
+﻿@model Diplom.Models.Vault
+@using Diplom.Controllers
+
+@{
+    ViewBag.Title = "Редактирование";
+    var users = TempData["users"];
+
+}
+
+<h4>Свод</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="form-group">
+                <label asp-for="DateStart" class="control-label">Дата начала</label>
+                <input asp-for="DateStart" type="date" class="form-control" />
+                <span asp-validation-for="DateStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateEnd" class="control-label">Дата конца</label>
+                <input asp-for="DateEnd" type="date" class="form-control" />
+                <span asp-validation-for="DateEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Свод добавил</label>
+                <select class="form-control" asp-for="IdUser">
+                    @foreach (var item in (List<VaultsController.SelectOptions>)users)
+                    {
+                        <option value="@item.value">@item.Fn @item.Ln</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group" style="display:flex">
+                <div>
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+                <div>
+                    <a class="btn" asp-action="Index"><i class="bi bi-arrow-return-left"></i>Вернуться</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

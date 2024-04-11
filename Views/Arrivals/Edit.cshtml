@@ -1,0 +1,43 @@
+﻿@model Diplom.Models.Arrival
+
+
+
+<h4>Приход</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-id="@Model.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="IdFood" />
+            <input type="hidden" asp-for="IdVaultNote" />
+
+            <div class="form-group">
+                
+                <input asp-for="Date" type="hidden" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FoodCount" class="control-label">Количество продуктов</label>
+                <input asp-for="FoodCount" type="number" step="any" class="form-control" />
+                <span asp-validation-for="FoodCount" class="text-danger"></span>
+            </div>
+            <div style="display:flex" class="form-group">
+                <div>
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+                <div>
+                    <a class="btn" asp-action="Index" asp-route-idVaultNote="@Model.IdVaultNote"><i class="bi bi-arrow-return-left"></i>Вернуться</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,50 @@
+﻿@model Diplom.Models.ProductConsumption
+
+
+
+<h4>Расход</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-id="@Model.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="IdFood" />
+            <input type="hidden" asp-for="IdVaultNote" />
+
+            <div class="form-group">
+                
+                <input asp-for="Date" type="hidden" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FoodCountChild" class="control-label">Количество продукта на сад</label>
+                <input asp-for="FoodCountChild" type="number" step="any" class="form-control" />
+                <span asp-validation-for="FoodCountChild" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FoodCountKid" class="control-label">Количество продукта на ясли</label>
+                <input asp-for="FoodCountKid" type="number" step="any" class="form-control" />
+                <span asp-validation-for="FoodCountKid" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="display:flex">
+                <div>
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+                <div>
+                    <a asp-action="Index" class="btn" asp-route-idVaultNote="@Model.IdVaultNote"><i class="bi bi-arrow-return-left"></i>Вернуться</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

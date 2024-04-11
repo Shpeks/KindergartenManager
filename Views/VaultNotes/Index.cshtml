@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Diplom.Models.VaultNote>
+<link rel="stylesheet" href="~/css/Table.css" />
+
+
+<p>
+    <a asp-controller="Vaults" asp-action="Index" class="btn"><i class="bi bi-arrow-left-short"></i>Вернуться к списку сводов</a>
+    
+</p>
+
+<div class="container rounded bg-white">
+    <div class="h2 ml-2 font-weight-bold">Записи свода</div>
+    <div style="max-height: 600px; overflow-y:auto">
+        <table class="table">
+            <thead class="sticky-top">
+                <tr class="bg-white">
+                    <th scope="col">
+                        Дата
+                    </th>
+                    <th scope="col">
+                        Сад
+                    </th>
+                    <th scope="col">
+                        Ясли
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="bg-blue">
+                        <td class="pt-3">
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td class="pt-3">@item.ChildCount</td>
+                        <td class="pt-3">@item.KidCount</td>
+                        <td class="pt-3">
+                            <div class="dropdown position">
+                                <a class="btn btn-sm btn-icon-only icon-color" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" style="z-index:9999;">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn">Дети</a>
+                                    <a href="@Url.Action("Index", "Arrivals", new { idVaultNote = item.Id})" class="btn" style="margin-left:14px">Приход</a>
+                                    <a href="@Url.Action("Index", "ProductConsumptions", new { idVaultNote = item.Id })" class="btn">Расход</a>
+                                    <a href="@Url.Action("Index", "PreviousBalances", new { idVaultNote = item.Id })" class="btn">Остаток</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn">Удалить</a>
+                                </div>
+
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

@@ -1,0 +1,36 @@
+﻿@model Diplom.Models.Meal
+
+<h4>Редактирование</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Название</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <input type="hidden" name="IdMenu" value="@ViewBag.IdMenu" />
+            <div class="form-group" style="display:flex">
+                <div>
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+                <div>
+                    <a asp-action="Create" asp-route-IdMenu="@ViewBag.IdMenu" class="btn">
+                        <i class="bi bi-arrow-return-left"></i>
+                        Вернуться
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,59 @@
+﻿@model Diplom.Models.Menu
+@using Diplom.Controllers
+
+@{ 
+    var users = TempData["users"];
+}
+
+<h4>Редактирование</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="form-group">
+                <label asp-for="date" class="control-label">Дата</label>
+                <input asp-for="date" type="date" class="form-control" />
+                <span asp-validation-for="date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChildHouse" class="control-label">Кому</label>
+                <input asp-for="ChildHouse" class="form-control" />
+                <span asp-validation-for="ChildHouse" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChildCount" class="control-label">Количество детей</label>
+                <input asp-for="ChildCount" type="number" class="form-control" />
+                <span asp-validation-for="ChildCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdUser" class="control-label">Пользователь</label>
+                <select class="form-control" asp-for="IdUser">
+
+                    @if (users != null)
+                    {
+                        foreach (var item in (List<MenusController.SelectOptions>)users)
+                        {
+                            <option value="@item.value">@item.Fn @item.Ln</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group" style="display:flex">
+                <div>
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+                <div>
+                    <a asp-action="Index" class="btn"><i class="bi bi-arrow-return-left"></i>Вернуться</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

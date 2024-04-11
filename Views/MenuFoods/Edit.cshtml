@@ -1,0 +1,90 @@
+﻿@model Diplom.Models.MenuFood
+
+<h4>Редактирование</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Название</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountPerUnit" class="control-label">Количество за единицу</label>
+                <input asp-for="CountPerUnit" class="form-control" />
+                <span asp-validation-for="CountPerUnit" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+
+                <input asp-for="Supply" type="hidden" class="form-control" />
+                <span asp-validation-for="Supply" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Code" class="control-label">Код</label>
+                <input asp-for="Code" class="form-control" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MealId" class="control-label">Блюдо</label>
+                <select asp-for="MealId" class="form-control select2" asp-items="ViewBag.MealId"></select>
+                <span asp-validation-for="MealId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MealTimeId" class="control-label">Время приема пищи</label>
+                <select asp-for="MealTimeId" class="form-control select2" asp-items="ViewBag.MealTimeId"></select>
+                <span asp-validation-for="MealTimeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitId" class="control-label">Единица измерения</label>
+                <select asp-for="UnitId" class="form-control select2" asp-items="ViewBag.UnitId"></select>
+                <span asp-validation-for="UnitId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="MenuId" type="hidden" class="form-control" asp-items="ViewBag.MenuId" />
+
+
+            </div>
+            <div class="form-group" style="display:flex">
+                <div>
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+                <div>
+                    <a asp-action="Index" asp-route-IdMenu="@ViewBag.IdMenu" class="btn ml-3">
+                        <i class="bi bi-arrow-return-left"></i>
+                        Вернуться
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({
+                minimumInputLength: 2, // Минимальное количество символов для начала поиска
+                ajax: {
+                    url: '/Search/Meals', // URL для запросов поиска
+                    dataType: 'json',
+                    delay: 250, // Задержка перед отправкой запроса (в миллисекундах)
+                    processResults: function (data) {
+                        // Обработка результатов запроса и формирование данных для Select2
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                }
+            });
+        });
+    </script>
+}
+

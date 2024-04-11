@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Diplom.Models.PreviousBalance>
+    <link rel="stylesheet" href="~/css/Table.css" />
+
+<p>
+    <a asp-controller="VaultNotes" class="btn" asp-action="Index" asp-route-IdVault="@ViewBag.IdVault"><i class="bi bi-arrow-left-short"></i>Вернуться к списку</a>
+</p>
+
+
+
+<div class="container rounded bg-white">
+    <div class="h2 ml-2 font-weight-bold">Остатки</div>
+    <form asp-controller="PreviousBalances" asp-action="Index" method="get" class="">
+        <input type="hidden" name="idVaultNote" value="@ViewBag.IdVaultNote" />
+        <div class="input-group">
+            <input class="form-control py-2 border-right-0 border" type="search" id="example-search-input" name="searchString" value="@ViewData["CurrentFilter"]" placeholder="Поиск по названию">
+            <span class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+            </span>
+        </div>
+    </form>
+    <div style="max-height:600px; overflow-y:auto;">
+        <table class="table">
+            <thead class="sticky-top">
+                <tr class="bg-white">
+                    <th scope="col">
+                        Продукт
+                    </th>
+                    <th scope="col">
+                        Начальный остаток
+                    </th>
+                    <th scope="col">
+                        Конечный остаток
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="bg-blue">
+                        <td class="pt-3">
+                            @item.Food.NameFood
+                        </td>
+                        <td class="pt-3">
+                            @item.StartBalance
+                        </td>
+                        <td class="pt-3">
+                            @item.EndBalance
+                        </td>
+                        <td>
+                            <div class="dropdown position">
+                                <a class="btn btn-sm btn-icon-only icon-color" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a asp-action="Edit" class="btn" asp-route-id="@item.Id">Редактировать</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

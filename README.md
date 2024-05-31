@@ -1,4 +1,4 @@
-![image](https://github.com/Shpeks/KindergartenManager/assets/96112171/dc4846fe-d39f-40e8-a732-fda3d5e8d1c7)Web application on .net 5. Created to automate accounting for a supply agent in a kindergarten. In this application there are 3 roles: supply agent, medical personnel and admin. 
+Web application on .net 5. Created to automate accounting for a supply agent in a kindergarten. In this application there are 3 roles: supply agent, medical personnel and admin. 
 The role of the medical staff is to create a menu for the day with which the supply agent works.
 The role of the purchasing agent is to compile a summary that will be sent to the accounting department.
 From this list it will be clear what needs to be given to the kitchen for cooking or viewing what products are missing and making a request to order products. 

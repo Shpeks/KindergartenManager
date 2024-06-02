@@ -1,11 +1,12 @@
-Web application on ASP .NET 5. 
-SQL Server with EF was used as a database. 
-Created to automate supply accounting in a kindergarten. There are 3 roles in this application: Purchasing Agent, Medical Staff and Administrator. 
-The role of the medical staff is to create a menu for the day that the supply worker works with.
-The role of the purchasing agent is to compile a summary that will be sent to the accounting department.
-From this list it will be clear what needs to be sent to the kitchen for cooking or viewing, what products are missing and to make a request to order products. 
-There is also export to an Excel template file.
-The administrator grants rights to view/edit data.
+Web application on ASP .NET 5
+SQL Server with EF was used as a database
+Identity was used to work with users
+Created to automate supply accounting in a kindergarten. There are 3 roles in this application: Purchasing Agent, Medical Staff and Administrator
+The role of the medical staff is to create a menu for the day that the supply worker works with
+The role of the purchasing agent is to compile a summary that will be sent to the accounting department
+From this list it will be clear what needs to be sent to the kitchen for cooking or viewing, what products are missing and to make a request to order products
+There is also export to an Excel template file
+The administrator grants rights to view/edit data
 
 Main Page
 ![image](https://github.com/Shpeks/KindergartenManager/assets/96112171/affe6866-9257-4754-90fc-06e8fc17ae18)
